@@ -1,3 +1,6 @@
+ï»¿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SalesApp.Data;
 namespace SalesApp
 {
     public class Program
@@ -5,6 +8,8 @@ namespace SalesApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<SalesAppContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SalesAppContext") ?? throw new InvalidOperationException("Connection string 'SalesAppContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -29,7 +34,7 @@ namespace SalesApp
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            //isso define que por padrão a rota será no controlador Home e a ação na pagina Index, o Id é opcional
+            //isso define que por padrï¿½o a rota serï¿½ no controlador Home e a aï¿½ï¿½o na pagina Index, o Id ï¿½ opcional
             app.Run();
         }
     }

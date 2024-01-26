@@ -29,7 +29,7 @@ namespace SalesApp
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            //isso define que por padrão a rota será no controlador Home e a ação na pagina Index, o Id é opcional
             app.Run();
         }
     }

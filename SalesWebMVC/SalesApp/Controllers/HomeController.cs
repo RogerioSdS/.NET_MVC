@@ -18,6 +18,21 @@ namespace SalesApp.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Salles Web MVC App from C# Course.";
+            ViewData["Student"] = "Rogerio Soares";
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -28,5 +43,6 @@ namespace SalesApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

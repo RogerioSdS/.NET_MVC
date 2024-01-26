@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SalesApp.Data;
 namespace SalesApp
 {
@@ -8,8 +7,10 @@ namespace SalesApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<SalesAppContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SalesAppContext") ?? throw new InvalidOperationException("Connection string 'SalesAppContext' not found.")));
+            builder.Services.AddDbContext<SalesAppContext>(
+                options => options.UseMySql(builder.Configuration.GetConnectionString("SalesAppContext"), 
+                ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesAppContext")), 
+                builder => builder.MigrationsAssembly("SalesApp")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

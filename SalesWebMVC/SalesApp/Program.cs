@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesApp.Data;
+using SalesApp.Services;
 namespace SalesApp
 {
     public class Program
@@ -19,6 +20,7 @@ namespace SalesApp
             var connectionStringMysql = builder.Configuration.GetConnectionString("SalesAppContext"); builder.Services.AddDbContext<SalesAppContext>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("8.0.25-mysql")));
 
             builder.Services.AddScoped<SeedingServices>();
+            builder.Services.AddScoped<SellerService>();
 
             var app = builder.Build();
             app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingServices>().Seed();

@@ -12,10 +12,16 @@ namespace SalesApp
                 ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesAppContext")), 
                 builder => builder.MigrationsAssembly("SalesApp")));
 
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            var connectionStringMysql = builder.Configuration.GetConnectionString("SalesAppContext"); builder.Services.AddDbContext<SalesAppContext>(options => options.UseMySql(connectionStringMysql, ServerVersion.Parse("8.0.25-mysql")));
+
+            builder.Services.AddScoped<SeedingServices>();
+
             var app = builder.Build();
+            app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingServices>().Seed();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

@@ -6,7 +6,10 @@
     <title>@ViewData["Title"] - Sales</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--Alteramos a fonte do arquivo bootstrap, baixamos um template no site bootswatch, chamado slate,
+                    renomeamos ele como bootstrap-slate.css, colocamos ele na pasta css do projeto e fizemos o 
+                    lonk dele aqui nas referencias -->
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-slate.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">

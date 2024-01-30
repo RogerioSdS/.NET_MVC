@@ -1,6 +1,8 @@
 ﻿using SalesApp.Data;
 using SalesApp.Models;
 using Microsoft.EntityFrameworkCore;
+using SalesApp.Services.Exceptions;
+using System.Data;
 
 namespace SalesApp.Services
 {
@@ -38,5 +40,22 @@ namespace SalesApp.Services
             _Context.SaveChanges();
         }
 
+        public void Update(Seller obj)
+        {
+            if(!_Context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+
+            try
+            {
+                _Context.Update(obj);
+                _Context.SaveChanges();
+            }
+            catch (DBConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+        }
     }
 }

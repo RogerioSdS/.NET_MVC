@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Sales</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
         <!--Alteramos a fonte do arquivo bootstrap, baixamos um template no site bootswatch, chamado slate,
@@ -24,21 +24,18 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="sr-only">Sales APP</span>
+                    <span class="icon-bar"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HOME</a></span>
+                    <span class="icon-bar"><a asp-area="" asp-controller="Sellers" asp-action="Index" class="navbar-brand">SELLERS</a></span>
+                    <span class="icon-bar"><a asp-area="" asp-controller="Departments" asp-action="Index" class="navbar-brand">DEPARTMENTS</a></span>
+                
+               
+                
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Sales</a>
+                
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Departments" asp-action="Index">Departments</a></li>
-                    <li><a asp-area="" asp-controller="Sellers" asp-action="Index">Sellers</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+               
             </div>
         </div>
     </nav>

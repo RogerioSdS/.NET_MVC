@@ -16,5 +16,11 @@ namespace SalesApp.Services
         {
             return _Context.Seller.ToList();
         }
+
+        public void Insert(Seller seller)
+        {
+            _Context.Add(seller);
+            _Context.SaveChanges();
+        }
     }
 }

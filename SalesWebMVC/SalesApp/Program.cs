@@ -21,6 +21,7 @@ namespace SalesApp
 
             builder.Services.AddScoped<SeedingServices>();
             builder.Services.AddScoped<SellerService>();
+            builder.Services.AddScoped<DepartmentService>();
 
             var app = builder.Build();
             app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingServices>().Seed();

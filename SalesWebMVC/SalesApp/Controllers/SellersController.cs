@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesApp.Models;
+using SalesApp.Models.ViewModels;
 using SalesApp.Services;
 
 
@@ -9,9 +10,11 @@ namespace SalesApp.Controllers
     {
         //Criando a dependencia da injeção, para injetar a dependência da classe SellerService no construtor da classe SellersController.
         private readonly SellerService _sellerService;
-        public SellersController(SellerService sl)
+        private readonly DepartmentService _departmentDervice;
+        public SellersController(SellerService sl, DepartmentService departmentDervice)
         {
             _sellerService = sl;
+            _departmentDervice = departmentDervice;
         }
 
         public IActionResult Index()
@@ -22,7 +25,9 @@ namespace SalesApp.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var deparments = _departmentDervice.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = deparments };
+            return View(viewModel);
         }
 
         [HttpPost] //Indicando que é uma ação de insert, ou seja, post

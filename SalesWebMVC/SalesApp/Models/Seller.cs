@@ -8,6 +8,7 @@
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; } //Criamos esse atributo para que o Framework consiga trabalhar com a possibilidade de um Id nullo 
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
         public Seller() { }

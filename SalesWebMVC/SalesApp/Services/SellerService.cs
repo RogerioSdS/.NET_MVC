@@ -1,5 +1,6 @@
 ﻿using SalesApp.Data;
 using SalesApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesApp.Services
 {
@@ -26,7 +27,8 @@ namespace SalesApp.Services
 
         public Seller FindById(int id) 
         {
-            return _Context.Seller.FirstOrDefault(obj => obj.Id == id);
+            //Fazendo o eafer loading, que é carregar outros objetos ligados ao objeto principal, usando o Include
+            return _Context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)

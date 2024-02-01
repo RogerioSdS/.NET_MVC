@@ -61,7 +61,6 @@ namespace SalesApp.Controllers
             }
 
             return View(obj);
-
         }
 
         [HttpPost]
@@ -128,8 +127,7 @@ namespace SalesApp.Controllers
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
-            }
-            
+            }            
         }
 
         public IActionResult Error(string message)

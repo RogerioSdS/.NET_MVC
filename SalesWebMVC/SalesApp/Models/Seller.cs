@@ -1,11 +1,19 @@
-﻿namespace SalesApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SalesApp.Models
 {
     public class Seller
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]//Definindo a semantica dos tipos de dados no display
         public string Email { get; set; }
+        [Display(Name = "Birth Date")] //Criando uma label customizada no display
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+        [Display(Name = "Base Salary")] //Criando uma label customizada no display
+        [DisplayFormat(DataFormatString ="{0:F2}")] // Configurando formato dos dados no display
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
         public int DepartmentId { get; set; } //Criamos esse atributo para que o Framework consiga trabalhar com a possibilidade de um Id nullo 

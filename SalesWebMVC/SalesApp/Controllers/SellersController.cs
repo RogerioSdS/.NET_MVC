@@ -2,7 +2,6 @@
 using SalesApp.Models;
 using SalesApp.Models.ViewModels;
 using SalesApp.Services;
-using SalesApp.Services.Exceptions;
 using System.Diagnostics;
 
 
@@ -14,11 +13,11 @@ namespace SalesApp.Controllers
     {
         //Criando a dependencia da injeção, para injetar a dependência da classe SellerService no construtor da classe SellersController.
         private readonly SellerService _sellerService;
-        private readonly DepartmentService _departmentDervice;
+        private readonly DepartmentService _departmentService;
         public SellersController(SellerService sl, DepartmentService departmentDervice)
         {
             _sellerService = sl;
-            _departmentDervice = departmentDervice;
+            _departmentService = departmentDervice;
         }
 
         public IActionResult Index()
@@ -29,7 +28,7 @@ namespace SalesApp.Controllers
 
         public IActionResult Create()
         {
-            var deparments = _departmentDervice.FindAll();
+            var deparments = _departmentService.FindAll();
             var viewModel = new SellerFormViewModel { Departments = deparments };
             return View(viewModel);
         }
@@ -42,6 +41,13 @@ namespace SalesApp.Controllers
                             Em resumo, o uso de [ValidateAntiForgeryToken] é uma prática de segurança importante para proteger contra ataques CSRF em aplicativos da web.*/
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid) // Condição que valida se o modelo foi validado
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -50,7 +56,7 @@ namespace SalesApp.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(Error), new {message = "Id not provided"});
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var obj = _sellerService.FindById(id.Value);
@@ -103,7 +109,7 @@ namespace SalesApp.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            List<Department> departments = _departmentDervice.FindAll();
+            List<Department> departments = _departmentService.FindAll();
             SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
 
             return View(viewModel);
@@ -113,6 +119,13 @@ namespace SalesApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            if (!ModelState.IsValid) // Condição que valida se o modelo foi validado
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
@@ -127,7 +140,7 @@ namespace SalesApp.Controllers
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
-            }            
+            }
         }
 
         public IActionResult Error(string message)

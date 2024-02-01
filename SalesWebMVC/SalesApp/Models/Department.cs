@@ -8,9 +8,9 @@
 
         public Department() { }
 
-        public Department(int id, string name)
+        public Department(int? id, string name)
         {
-            Id = id;
+            Id = id.Value;
             Name = name;
         }
 

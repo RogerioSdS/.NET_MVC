@@ -36,9 +36,16 @@ namespace SalesApp.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _Context.Seller.FindAsync(id);
-            _Context.Seller.Remove(obj);
-            await _Context.SaveChangesAsync();
+            try
+            {
+                var obj = await _Context.Seller.FindAsync(id);
+                _Context.Seller.Remove(obj);
+                await _Context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityExceptions(e.Message);
+            }
         }
 
         public async Task UpdateAsync(Seller obj)

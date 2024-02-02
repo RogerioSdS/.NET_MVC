@@ -2,6 +2,7 @@
 using SalesApp.Models;
 using SalesApp.Models.ViewModels;
 using SalesApp.Services;
+using SalesApp.Services.Exceptions;
 using System.Diagnostics;
 
 
@@ -73,8 +74,15 @@ namespace SalesApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityExceptions e)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Can't delete seller, because he/she das sales" });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)

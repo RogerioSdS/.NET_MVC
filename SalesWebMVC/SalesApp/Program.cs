@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
+﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using SalesApp.Data;
 using SalesApp.Services;
+using System.Globalization;
 namespace SalesApp
 {
     public class Program
@@ -11,8 +11,8 @@ namespace SalesApp
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<SalesAppContext>(
-                options => options.UseMySql(builder.Configuration.GetConnectionString("SalesAppContext"), 
-                ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesAppContext")), 
+                options => options.UseMySql(builder.Configuration.GetConnectionString("SalesAppContext"),
+                ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("SalesAppContext")),
                 builder => builder.MigrationsAssembly("SalesApp")));
 
 
@@ -29,6 +29,8 @@ namespace SalesApp
             var app = builder.Build();
             app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingServices>().Seed();
 
+            #region Antigo arquivo StartUp.cs
+            //Esta sessão do codigo faz parte do antigo startup.cs que tinha no Ent. Framework 6 e anteriores
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -55,11 +57,12 @@ namespace SalesApp
 
             app.UseAuthorization();
 
+            //isso define que por padrão a rota que será no controlador Home e a ação na pagina Index, o Id � opcional
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            //isso define que por padr�o a rota ser� no controlador Home e a a��o na pagina Index, o Id � opcional
             app.Run();
         }
+        #endregion
     }
 }

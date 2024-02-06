@@ -15,14 +15,14 @@ namespace SalesApp.Controllers
 
         public IActionResult Index()
         {
+            //ViewData é um dicionario na linguagem C#, ou seja, contem chave e valor
+            ViewData["Message"] = "Salles Web MVC App from C# Course.";
+            
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Salles Web MVC App from C# Course.";
-            ViewData["Student"] = "Rogerio Soares";
-
             return View();
         }
 

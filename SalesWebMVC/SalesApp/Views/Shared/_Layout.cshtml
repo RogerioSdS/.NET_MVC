@@ -31,9 +31,7 @@
                     <span class="icon-bar"><a asp-area="" asp-controller="Sellers" asp-action="Index" class="navbar-brand">Sellers</a></span>
                     <span class="icon-bar"><a asp-area="" asp-controller="Departments" asp-action="Index" class="navbar-brand">Departments</a></span>
                     <span class="icon-bar"><a asp-area="" asp-controller="SalesRecord" asp-action="Index" class="navbar-brand">Sales</a></span>
-
-
-
+                    <span class="icon-bar"><a asp-area="" asp-controller="About" asp-action="Index" class="navbar-brand">About</a></span>
                 </button>
 
             </div>
@@ -42,8 +40,9 @@
         </div>
     </nav>
 
-    <partial name="_CookieConsentPartial" />
 
+    <partial name="_CookieConsentPartial" />
+   
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -7,9 +7,9 @@
 
     <environment include="Development">
         <!--Alteramos a fonte do arquivo bootstrap, baixamos um template no site bootswatch, chamado slate,
-                    renomeamos ele como bootstrap-slate.css, colocamos ele na pasta css do projeto e fizemos o 
+                    renomeamos ele como bootstrap-slate.css, colocamos ele na pasta css do projeto e fizemos o
                     lonk dele aqui nas referencias -->
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-slate.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.quartz.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -23,20 +23,21 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+                <span class="sr-only" style="font-weight: bold; font-size: 1.8em; font-style: italic; color: #191970;">
+                    SALES APP<sup style="font-size: 0.5em;">®</sup>
+                </span>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Sales APP</span>
                     <span class="icon-bar"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Home</a></span>
                     <span class="icon-bar"><a asp-area="" asp-controller="Sellers" asp-action="Index" class="navbar-brand">Sellers</a></span>
                     <span class="icon-bar"><a asp-area="" asp-controller="Departments" asp-action="Index" class="navbar-brand">Departments</a></span>
                     <span class="icon-bar"><a asp-area="" asp-controller="SalesRecord" asp-action="Index" class="navbar-brand">Sales</a></span>
-                
-               
-                
+
+
+
                 </button>
-                
+
             </div>
             <div class="navbar-collapse collapse">
-               
             </div>
         </div>
     </nav>
